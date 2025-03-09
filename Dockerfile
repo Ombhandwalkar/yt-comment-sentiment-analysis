@@ -8,7 +8,7 @@ COPY flask_app/ /app/
 
 COPY tfidf_vectorizer.pkl /app/tfidf_vectorizer.pkl
 
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 
 RUN python -m nltk.downloader stopwords wordnet
 
