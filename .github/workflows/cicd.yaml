@@ -106,8 +106,7 @@ jobs:
         run: |
           aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 390844758498.dkr.ecr.us-east-1.amazonaws.com
-
+          aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/b2r6l3l6
       - name: Build Docker image
         if: success()
         run: |
@@ -116,9 +115,9 @@ jobs:
       - name: Tag Docker image
         if: success()
         run: |
-          docker tag yt-chrome-plugin:latest 390844758498.dkr.ecr.us-east-1.amazonaws.com/yt-chrome-plugin:latest
+          docker tag yt-chrome-plugin:latest public.ecr.aws/b2r6l3l6/yt-chrome-plugin:latest
 
       - name: Push Docker image to AWS ECR
         if: success()
         run: |
-          docker push 390844758498.dkr.ecr.us-east-1.amazonaws.com/yt-chrome-plugin:latest
+          docker push public.ecr.aws/b2r6l3l6/yt-chrome-plugin:latest
