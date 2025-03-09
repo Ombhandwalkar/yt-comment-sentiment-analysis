@@ -14,6 +14,8 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from mlflow.tracking import MlflowClient
 import matplotlib.dates as mdates
+import nltk 
+nltk.download('stopwords')
 
 
 app=Flask(__name__)
@@ -64,18 +66,19 @@ model,vectorizer=load_model_and_vectorizer('yt_chrome_plugin_model','1','./tfidf
 def home():
     return 'Welcome to our Flask API'
 
+@app.route('/predict_with_timestamps',methods=['POST'])
 def predict_with_timestamps():
     data=request.json
-    comments_data=data.get('comment')
+    comments_data=data.get('comments')
 
     if not comments_data:
         return jsonify({'Error':'No comment provided'}),400
     try:
         comments=[item['text'] for item in comments_data]
-        timestamps=[item['timestamps']for item in comments_data]
+        timestamps=[item['timestamp']for item in comments_data]
 
         # Process Each comment before vectorizing 
-        processed_comments= [preprocess_comment(comments)for comment in comments]
+        processed_comments= [preprocess_comment(comment)for comment in comments]
 
         # Transform comments before using vectorizer
         transformed_comments=vectorizer.transform(processed_comments)
@@ -146,6 +149,7 @@ def generate_chart():
             labels=labels,
             colors=colors,
             autopct='%1.1f%%',
+            startangle=140,
             textprops={'color':'w'}
         )
         plt.axis('equal')
