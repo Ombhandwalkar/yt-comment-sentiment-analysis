@@ -2,7 +2,7 @@ FROM python:3.9-alpine
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y libgomp1
+RUN apk add --no-cache libgomp
 
 COPY flask_app/ /app/
 
