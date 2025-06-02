@@ -34,15 +34,36 @@ jobs:
           AWS_DEFAULT_REGION: eu-north-1
         run: |
           dvc repro 
+# So after Push, there some changes occur in DVC side (liken in dvc.lock) so we need to push DVC on server
 
-      # - name: Push DVC-tracked data to remote 
-      #   env:
-      #     AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
-      #     AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_ACCESS_KEY}}
-      #     AWS_DEFAULT_REGION: eu-north-1
-      #   run: |
-      #     dvc push 
-        
-      # - name: Configure Git
-      #   run: |
-      #     git config --global user.name
+      - name: Push DVC-tracked data to remote 
+        env:
+          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_ACCESS_KEY}}
+          AWS_DEFAULT_REGION: eu-north-1
+        run: |
+          dvc push 
+
+# We are telling GitHub-actions[BOT] to do this work on be-half with our permission     
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Add changes to Git 
+        run: |
+          git add .
+ 
+      - name: Commit changes
+        if: ${{github.actor != 'github-actions[bot]'}}
+        run: |
+          git commit -m "Automated commit of DVC outputs and updated code " || echo "No changes to commit"
+
+# We are telling model dont trigger the continuous integration again.
+# If we don't do this it will run Infinite times.  
+      - name: Push Changes 
+        if: ${{github.actor != 'github-actions[bot]'}}
+        env: 
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: |
+          git push origin ${{github.ref_name}}
