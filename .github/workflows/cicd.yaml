@@ -7,15 +7,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - names: Checkout code # This will fetch our code to Github
+      - name: Checkout code # This will fetch our code to Github
         uses: actions/checkout@v3   # You are telling GitHub Actions to use the official version3
 
-      - names: Set up Python 
+      - name: Set up Python 
         uses: actions/setup-python@v2 # Setting up python
         with:
           python-version:'3.10'
         
-      - names: Cache pip  dependencies  # Caching the dependencies
+      - name: Cache pip  dependencies  # Caching the dependencies
         uses: actions/cache@v3 
         with:
           path: ~/.cache/pip 
