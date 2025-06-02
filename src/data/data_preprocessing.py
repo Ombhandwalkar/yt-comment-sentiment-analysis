@@ -43,7 +43,7 @@ def preprocess_comment(comment:pd.DataFrame)->pd.DataFrame:
         comment= re.sub(r'[^A-Za-z0-9\s!?.,]', '', comment)
 
         # Remove specific stopwords
-        stop_words=set(stopwords.words('english'))-{'not','however','but','no' ,'yet'}
+        stop_words=set(stopwords.words('english'))-{'not','however','but','no' ,'yet'}# We are not removing these specific words,these make impact in semantic meanings.
         comment = ' '.join ([word for word in comment.split() if word not in stop_words])
 
         # Lemmatize the words

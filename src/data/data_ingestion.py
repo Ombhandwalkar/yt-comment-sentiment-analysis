@@ -23,7 +23,7 @@ file_handler.setFormatter(formatter)
 logger.addHandler(console_handler)
 logger.addHandler(file_handler)
 
-# Loas Parameter from YAML file
+# Load Parameter from YAML file
 def load_params(params_path:str)->dict:
     try:
         with open(params_path,'r')as file:

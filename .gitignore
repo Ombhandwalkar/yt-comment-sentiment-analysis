@@ -90,3 +90,11 @@ target/
 /tfidf_vectorizer.pkl
 /lgbm_model.pkl
 /experiment_info.json
+myenv
+temp.txt
+.env 
+test.txt
+trail_app.txt
+flask_app/.env
+notebooks/app.txt
+myenv 
