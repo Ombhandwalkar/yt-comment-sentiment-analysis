@@ -113,7 +113,7 @@ jobs:
       - name: Login to AWS ECR
         if: success()
         run: |
-          aws configure set aws_access_id ${{secrets.AWS_ACCESS_KEY_ID}}
+          aws configure set aws_access_key_id ${{secrets.AWS_ACCESS_KEY_ID}}
           aws configure set aws_secret_access_key ${{secrets.AWS_SECRET_ACCESS_KEY}}
           aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/n4j8b0m8
         
