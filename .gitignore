@@ -98,3 +98,5 @@ trail_app.txt
 flask_app/.env
 notebooks/app.txt
 myenv 
+docker_MGB.txt 
+docker_original.txt 
