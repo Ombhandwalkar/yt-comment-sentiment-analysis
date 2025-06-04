@@ -111,7 +111,7 @@ jobs:
 
 # Login to AWS ECR for Docker deploy
       - name: Login to AWS ECR
-        if: sucess()
+        if: success()
         run: |
           aws configure set aws_access_id ${{secrets.AWS_ACCESS_KEY_ID}}
           aws configure set aws_secret_access_key ${{secrets.AWS_SECRET_ACCESS_KEY}}
@@ -119,19 +119,19 @@ jobs:
         
 # Build the Docker image
       - name: Build Docker image 
-        if: sucess()
+        if: success()
         run: |
           docker build -t yt-analytics-chat-bot .
   
 # Tag the Docker image
       - name: Tag Docker image 
-        if: sucess()
+        if: success()
         run: |
           docker tag yt-analytics-chat-bot:latest public.ecr.aws/n4j8b0m8/yt-analytics-chat-bot:latest
 
 #  Push Docker image to AWS ECR
       - name: Push Docker image to AWS ECR 
-        if: sucess()
+        if: success()
         run: |
           docker push public.ecr.aws/n4j8b0m8/yt-analytics-chat-bot:latest
       
