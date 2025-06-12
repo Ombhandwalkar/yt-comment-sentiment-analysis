@@ -19,7 +19,8 @@ A full-stack AI-powered Chrome Extension that helps **content creators and viewe
 [![Demo Video](https://img.youtube.com/vi/2s2H7y6Zu5E/0.jpg)](https://youtu.be/2s2H7y6Zu5E)
 
 ---
-
+## Front End- https://github.com/Ombhandwalkar/YT-Analytics-Chrome-Plugin-Front-End
+---
 ## ✨ Key Features
 ## 🎨 Creator Mode Dashboard
 
